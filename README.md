@@ -7,21 +7,23 @@
 
 ## How to use the library in your project
 ##### Step 1. Please paste this code in your ***settings.gradle*** file
-```javascript
+```java
 dependencyResolutionManagement {
 	repositories {
         maven { url 'https://jitpack.io' }
     }
-}```
+}
+```
 
 ##### Step 2. Paste the below code in your ***build.gradle:app*** file
-```javascript
+```java
 dependencies {
     implementation 'com.github.criminact:OTPView:1.0.0'
-}```
+}
+```
 
 ##### Step 3. Use the OTP text view in your xml file
-```javascript
+```java
 <com.noobcode.otpview.OTPView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,7 +33,8 @@ dependencies {
         app:otpLength="6" //Sets the length of the OTP, default is 6 (Integer)
         app:spaceBetween="20" //Sets the space between the neighbouring Bottom Lines
 		/>
-}```
+}
+```
 
 ## Author
 ##### Maintained by [Raj Hada](https://github.com/criminact/ "Raj Hada")
