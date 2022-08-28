@@ -25,6 +25,7 @@ dependencies {
 ##### Step 3. Use the OTP text view in your xml file
 ```java
 <com.noobcode.otpview.OTPView
+        android:id="@+id/otpView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -33,6 +34,19 @@ dependencies {
         app:otpLength="6" //Sets the length of the OTP, default is 6 (Integer)
         app:spaceBetween="20" //Sets the space between the neighbouring Bottom Lines
 		/>
+}
+```
+
+##### Step 4. Use the OTP listener callback to get the OTP and a completion callback
+```java
+var otpView = findViewById<OTPView>(R.id.otpView)
+
+otpView.setOTPListener(object : OTPView.OTPListener {
+    override fun onOTPCompleted(otp: String) {
+	Toast.makeText(this@MainActivity, "OTP Completed", Toast.LENGTH_LONG).show()
+	//comapre the OTP submitted by user to your generated one. Handle success and failure accordinly
+    }
+
 }
 ```
 
