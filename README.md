@@ -44,7 +44,7 @@ var otpView = findViewById<OTPView>(R.id.otpView)
 otpView.setOTPListener(object : OTPView.OTPListener {
     override fun onOTPCompleted(otp: String) {
 	Toast.makeText(this@MainActivity, "OTP Completed", Toast.LENGTH_LONG).show()
-	//comapre the OTP submitted by user to your generated one. Handle success and failure accordinly
+	//compare the OTP submitted by user to your generated one. Handle success and failure accordinly
     }
 
 }
