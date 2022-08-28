@@ -33,8 +33,7 @@ dependencies {
         app:borderThickness="6" //Sets the Border Thickness, default is 1 (Integer)
         app:otpLength="6" //Sets the length of the OTP, default is 6 (Integer)
         app:spaceBetween="20" //Sets the space between the neighbouring Bottom Lines
-		/>
-}
+/>
 ```
 
 ##### Step 4. Use the OTP listener callback to get the OTP and a completion callback
