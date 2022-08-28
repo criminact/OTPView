@@ -4,23 +4,45 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.text.Editable
+import android.text.InputFilter
+import android.text.InputFilter.LengthFilter
 import android.text.InputType
+import android.text.TextWatcher
 import android.util.AttributeSet
 
 class OTPView(context: Context, attrs: AttributeSet) :
     androidx.appcompat.widget.AppCompatEditText(context, attrs) {
 
-//    var layoutType: Int = 0
+    //------------------------variables------------------------
     var otpLength: Int = 6
-//    var autoSubmit: Boolean = true
     var borderThickness: Int = 1
-    lateinit var mPaint: Paint
+    var mPaint: Paint
     var borderColor: Int = Color.BLACK
     var spaceBetween: Float = 24f
     var spaceBetweenWithDensity: Float = 24f
     var lineSpacing: Float = 8f
     var lineSpacingWithDensity: Float = 8f
+    private var OtpListener: OTPListener? = null
     private var mClickListener: OnClickListener? = null
+
+    //------------------------listeners------------------------
+    private var mTextWatcher: TextWatcher? = object : TextWatcher {
+        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            //
+        }
+
+        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            if(p0?.length == otpLength){
+                OtpListener?.onOTPCompleted(p0.toString())
+            }
+        }
+
+        override fun afterTextChanged(p0: Editable?) {
+            //
+        }
+
+    }
 
     init {
         val typedArray = context.obtainStyledAttributes(
@@ -29,10 +51,7 @@ class OTPView(context: Context, attrs: AttributeSet) :
         )
         try {
             otpLength = typedArray.getInteger(R.styleable.OTPView_otpLength, 6)
-//            layoutType = typedArray.getInteger(R.styleable.OTPView_layoutType, 0)
-//            autoSubmit = typedArray.getBoolean(R.styleable.OTPView_autoSubmit, true)
             borderThickness = typedArray.getInteger(R.styleable.OTPView_borderThickness, 2)
-//            borderColor = typedArray.getResourceId(R.styleable.OTPView_layoutColor, Color.BLACK)
             spaceBetween = typedArray.getFloat(R.styleable.OTPView_spaceBetween, 24f)
 
             val multi = context.resources.displayMetrics.density
@@ -47,22 +66,18 @@ class OTPView(context: Context, attrs: AttributeSet) :
             this.inputType = InputType.TYPE_CLASS_NUMBER
             this.isCursorVisible = false
 
+            setMaxLength(otpLength)
+
             super.setOnClickListener { v -> // When tapped, move cursor to end of text.
                 setSelection(text!!.length)
                 mClickListener?.onClick(v)
             }
+
+            super.addTextChangedListener(mTextWatcher)
         }
         finally {
             typedArray.recycle()
         }
-    }
-
-    override fun setOnClickListener(l: OnClickListener?) {
-        mClickListener = l
-    }
-
-    override fun setCustomSelectionActionModeCallback(actionModeCallback: android.view.ActionMode.Callback?) {
-        throw RuntimeException("setCustomSelectionActionModeCallback() not supported.")
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -98,4 +113,30 @@ class OTPView(context: Context, attrs: AttributeSet) :
             }
         }
     }
+
+    //------------------------setters------------------------
+    fun setOTPListener(listener: OTPListener) {
+        OtpListener = listener
+    }
+
+    override fun setOnClickListener(l: OnClickListener?) {
+        mClickListener = l
+    }
+
+    override fun setCustomSelectionActionModeCallback(actionModeCallback: android.view.ActionMode.Callback?) {
+        throw RuntimeException("setCustomSelectionActionModeCallback() not supported.")
+    }
+
+    private fun setMaxLength(length: Int) {
+        val filterArray = arrayOfNulls<InputFilter>(1)
+        filterArray[0] = LengthFilter(length)
+        super.setFilters(filterArray)
+    }
+
+    //------------------------callbacks------------------------
+    interface OTPListener {
+        fun onOTPCompleted(otp: String)
+    }
+
+
 }
