@@ -25,6 +25,7 @@ class OTPView(context: Context, attrs: AttributeSet) :
     var lineSpacingWithDensity: Float = 8f
     private var OtpListener: OTPListener? = null
     private var mClickListener: OnClickListener? = null
+    private var otpLayoutColor: Int = this.currentTextColor
 
     //------------------------listeners------------------------
     private var mTextWatcher: TextWatcher? = object : TextWatcher {
@@ -53,6 +54,7 @@ class OTPView(context: Context, attrs: AttributeSet) :
             otpLength = typedArray.getInteger(R.styleable.OTPView_otpLength, 6)
             borderThickness = typedArray.getInteger(R.styleable.OTPView_borderThickness, 2)
             spaceBetween = typedArray.getFloat(R.styleable.OTPView_spaceBetween, 24f)
+            otpLayoutColor = typedArray.getInteger(R.styleable.OTPView_otpLayoutColor, this.currentTextColor)
 
             val multi = context.resources.displayMetrics.density
             mPaint = Paint(paint)
@@ -95,7 +97,7 @@ class OTPView(context: Context, attrs: AttributeSet) :
         val textLength = text!!.length
         val textWidths = FloatArray(textLength)
         paint.getTextWidths(getText(), 0, textLength, textWidths)
-        mPaint.color = this.currentTextColor
+        mPaint.color = otpLayoutColor
         for (i in 0 until otpLength) {
             canvas.drawLine(startX, bottom, startX + mCharSize, bottom, mPaint)
             if (getText()!!.length > i) {
