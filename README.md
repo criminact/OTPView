@@ -18,7 +18,7 @@ dependencyResolutionManagement {
 ##### Step 2. Paste the below code in your ***build.gradle:app*** file
 ```java
 dependencies {
-    implementation 'com.github.criminact:OTPView:1.0.0'
+    implementation 'com.github.criminact:OTPView:Tag'
 }
 ```
 
