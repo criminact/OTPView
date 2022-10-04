@@ -26,6 +26,7 @@ class OTPView(context: Context, attrs: AttributeSet) :
     private var OtpListener: OTPListener? = null
     private var mClickListener: OnClickListener? = null
     private var otpLayoutColor: Int = this.currentTextColor
+    private var otpLayoutType: Int = 1
 
     //------------------------listeners------------------------
     private var mTextWatcher: TextWatcher? = object : TextWatcher {
@@ -55,6 +56,7 @@ class OTPView(context: Context, attrs: AttributeSet) :
             borderThickness = typedArray.getInteger(R.styleable.OTPView_borderThickness, 2)
             spaceBetween = typedArray.getFloat(R.styleable.OTPView_spaceBetween, 24f)
             otpLayoutColor = typedArray.getInteger(R.styleable.OTPView_otpLayoutColor, this.currentTextColor)
+            otpLayoutType = typedArray.getInteger(R.styleable.OTPView_otpLayoutType, 1)
 
             val multi = context.resources.displayMetrics.density
             mPaint = Paint(paint)
@@ -91,6 +93,7 @@ class OTPView(context: Context, attrs: AttributeSet) :
         }
         var startX: Float = paddingLeft.toFloat()
         val bottom: Float = (height - paddingBottom).toFloat()
+        var top: Float = 120f
 
         // Text Width
         val text = text
@@ -98,22 +101,43 @@ class OTPView(context: Context, attrs: AttributeSet) :
         val textWidths = FloatArray(textLength)
         paint.getTextWidths(getText(), 0, textLength, textWidths)
         mPaint.color = otpLayoutColor
-        for (i in 0 until otpLength) {
-            canvas.drawLine(startX, bottom, startX + mCharSize, bottom, mPaint)
-            if (getText()!!.length > i) {
-                val middle = startX + mCharSize / 2
-                paint.color = this.currentTextColor
-                canvas.drawText(
-                    text, i, i + 1, middle - textWidths[0] / 2, bottom - lineSpacingWithDensity,
-                    paint
-                )
+        if(otpLayoutType == 1){
+            for (i in 0 until otpLength) {
+                canvas.drawLine(startX, bottom, startX + mCharSize, bottom, mPaint)
+                if (getText()!!.length > i) {
+                    val middle = startX + mCharSize / 2
+                    paint.color = this.currentTextColor
+                    canvas.drawText(
+                        text, i, i + 1, middle - textWidths[0] / 2, bottom - lineSpacingWithDensity,
+                        paint
+                    )
+                }
+                if (spaceBetweenWithDensity < 0) {
+                    startX += (mCharSize * 2).toInt()
+                } else {
+                    startX += mCharSize + spaceBetweenWithDensity
+                }
             }
-            if (spaceBetweenWithDensity < 0) {
-                startX += (mCharSize * 2).toInt()
-            } else {
-                startX += mCharSize + spaceBetweenWithDensity
+        }else{
+            mPaint.style = Paint.Style.STROKE
+            for (i in 0 until otpLength) {
+                canvas.drawRect(startX, top, startX + mCharSize, bottom, mPaint)
+                if (getText()!!.length > i) {
+                    val middle = startX + mCharSize / 2
+                    paint.color = this.currentTextColor
+                    canvas.drawText(
+                        text, i, i + 1, middle - textWidths[0] / 2, bottom - lineSpacingWithDensity,
+                        paint
+                    )
+                }
+                if (spaceBetweenWithDensity < 0) {
+                    startX += (mCharSize * 2).toInt()
+                } else {
+                    startX += mCharSize + spaceBetweenWithDensity
+                }
             }
         }
+
     }
 
     //------------------------setters------------------------
