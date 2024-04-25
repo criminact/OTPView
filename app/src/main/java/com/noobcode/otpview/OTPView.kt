@@ -1,18 +1,22 @@
 package com.noobcode.otpview
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.RectF
 import android.text.Editable
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
 import android.text.InputType
 import android.text.TextWatcher
 import android.util.AttributeSet
+import android.view.View
+import android.widget.EditText
 
-class OTPView(context: Context, attrs: AttributeSet) :
-    androidx.appcompat.widget.AppCompatEditText(context, attrs) {
+@SuppressLint("AppCompatCustomView")
+class OTPView(context: Context, attrs: AttributeSet) : EditText(context, attrs) {
 
     //------------------------variables------------------------
     var otpLength: Int = 6
@@ -84,6 +88,7 @@ class OTPView(context: Context, attrs: AttributeSet) :
         }
     }
 
+    @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas) {
         val availableWidth = width - paddingRight - paddingLeft
         val mCharSize: Float = if (spaceBetweenWithDensity < 0) {
@@ -92,8 +97,8 @@ class OTPView(context: Context, attrs: AttributeSet) :
             (availableWidth - spaceBetweenWithDensity * (otpLength.toFloat() - 1)) / otpLength.toFloat()
         }
         var startX: Float = paddingLeft.toFloat()
+        val top: Float = 0f
         val bottom: Float = (height - paddingBottom).toFloat()
-        var top: Float = 120f
 
         // Text Width
         val text = text
@@ -121,12 +126,13 @@ class OTPView(context: Context, attrs: AttributeSet) :
         }else{
             mPaint.style = Paint.Style.STROKE
             for (i in 0 until otpLength) {
-                canvas.drawRect(startX, top, startX + mCharSize, bottom, mPaint)
+                val rectF = RectF(startX + mPaint.strokeWidth, top + mPaint.strokeWidth, startX + mCharSize - mPaint.strokeWidth, height.toFloat() - mPaint.strokeWidth)
+                canvas.drawRoundRect(rectF, 6F, 6F, mPaint)
                 if (getText()!!.length > i) {
                     val middle = startX + mCharSize / 2
                     paint.color = this.currentTextColor
                     canvas.drawText(
-                        text, i, i + 1, middle - textWidths[0] / 2, bottom - lineSpacingWithDensity,
+                        text, i, i + 1, middle - textWidths[0] / 2, bottom - lineSpacingWithDensity + mPaint.strokeWidth / 2,
                         paint
                     )
                 }
@@ -149,7 +155,7 @@ class OTPView(context: Context, attrs: AttributeSet) :
         mClickListener = l
     }
 
-    override fun setCustomSelectionActionModeCallback(actionModeCallback: android.view.ActionMode.Callback?) {
+    override fun setCustomSelectionActionModeCallback(actionModeCallback: android.view.ActionMode.Callback) {
         throw RuntimeException("setCustomSelectionActionModeCallback() not supported.")
     }
 
