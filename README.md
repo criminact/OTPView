@@ -1,5 +1,5 @@
 #  Customizable OTP Text View
-[![](https://jitpack.io/v/criminact/OTPView.svg)](https://jitpack.io/#criminact/OTPView)
+[![Jitpack >](https://jitpack.io/v/criminact/OTPView.svg)](https://jitpack.io/#criminact/OTPView)
 
 *Note - Help needed in maintenance, Please raise PRs for new features and bug fixes, I will review and merge them*
 
@@ -8,8 +8,8 @@
 ## How to use the library in your project
 ##### Step 1. Please paste this code in your ***settings.gradle*** file
 ```java
-dependencyResolutionManagement {
-	repositories {
+pluginManagement {
+    repositories {
         maven { url 'https://jitpack.io' }
     }
 }
@@ -29,11 +29,13 @@ dependencies {
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textColor="#FF000000" //Sets the Text Color and Bottom Line Color
-        app:borderThickness="6" //Sets the Border Thickness, default is 1 (Integer)
-        app:otpLength="6" //Sets the length of the OTP, default is 6 (Integer)
-        app:spaceBetween="20" //Sets the space between the neighbouring Bottom Lines
-/>
+        android:textColor="@color/white"
+        app:borderThickness="2"
+        app:otpLength="6"
+        app:otpLayoutColor="@color/teal_200"
+        app:otpLayoutType="0"
+        app:spaceBetween="16"
+    />
 ```
 
 ##### Step 4. Use the OTP listener callback to get the OTP and a completion callback
@@ -44,13 +46,18 @@ otpView.setOTPListener(object : OTPView.OTPListener {
     override fun onOTPCompleted(otp: String) {
 	Toast.makeText(this@MainActivity, "OTP Completed", Toast.LENGTH_LONG).show()
 	//compare the OTP submitted by user to your generated one. Handle success and failure accordingly
+	if(otp == "123456"){
+            otpView.showSuccess()
+        }else{
+            otpView.showFailure()
+        }
     }
 
 }
 ```
 
 ## Author
-##### Maintained by [Raj Hada](https://github.com/criminact/ "Raj Hada")
+### Maintained by [Raj Hada](https://github.com/criminact/ "Raj Hada")
 
 ## Contribution
-##### Bug reports and Feature requests/implementations are welcome
+### Bug reports and Feature requests/implementations are welcome
