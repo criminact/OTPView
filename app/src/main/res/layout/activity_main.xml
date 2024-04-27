@@ -3,25 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:background="@color/white"
+    android:background="@color/black"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingHorizontal="32dp"
     tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/teal_200"
+        android:layout_centerInParent="true"
+        android:layout_above="@+id/otpView"
+        android:layout_marginBottom="12dp"
+        android:textSize="17dp"
+        android:layout_alignParentLeft="true"
+        android:text="Share the OTP sent to +91-XXXXXXXXXX"/>
 
     <com.noobcode.otpview.OTPView
         android:id="@+id/otpView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:borderThickness="2"
         app:otpLength="6"
         android:text="123456"
-        app:successColor="@color/black"
-        app:failureColor="@color/white"
-        app:otpLayoutColor="@color/teal_700"
+        app:otpLayoutColor="@color/teal_200"
         app:otpLayoutType="0"
-        app:spaceBetween="24"
+        app:spaceBetween="16"
     />
 
 </RelativeLayout>
