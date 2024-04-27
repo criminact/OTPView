@@ -2,10 +2,6 @@
 [![](https://jitpack.io/v/criminact/OTPView.svg)](https://jitpack.io/#criminact/OTPView)
 
 *Note - Help needed in maintenance, Please raise PRs for new features and bug fixes, I will review and merge them*
-
-<img src="https://github.com/criminact/OTPView/blob/develop/github-assets/image%20(2).png"/> &nbsp;&nbsp;
-<img src="https://github.com/criminact/OTPView/blob/develop/github-assets/image%20(3).png" /> &nbsp;&nbsp;
-<img src="https://github.com/criminact/OTPView/blob/develop/github-assets/image%20(1).png" /> &nbsp;&nbsp;
 <img src="https://github.com/criminact/OTPView/blob/develop/github-assets/image.png"/> &nbsp;&nbsp;
 
 ## How to use the library in your project
