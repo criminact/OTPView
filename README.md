@@ -1,7 +1,11 @@
 #  Customizable OTP Text View
-[![Jitpack >](https://jitpack.io/v/criminact/OTPView.svg)](https://jitpack.io/#criminact/OTPView)
 
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/e84b2dc8fd81427e89251db0461e1c42)](https://app.codacy.com/gh/criminact/OTPView/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+<p align="center">
+  <a href="https://jitpack.io/#criminact/OTPView"><img src="https://jitpack.io/v/criminact/OTPView.svg" /></a>
+  <a href="https://app.codacy.com/gh/criminact/OTPView/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade"> <img src="https://app.codacy.com/project/badge/Grade/e84b2dc8fd81427e89251db0461e1c42" /></a>
+  <br /><br />
+</p>
+
 <img src="https://github.com/criminact/OTPView/blob/develop/github-assets/image.png"/> &nbsp;&nbsp;
 
 ## How to use the library in your project
