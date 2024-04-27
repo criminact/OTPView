@@ -1,12 +1,10 @@
 #  Customizable OTP Text View
 [![Jitpack >](https://jitpack.io/v/criminact/OTPView.svg)](https://jitpack.io/#criminact/OTPView)
 
-*Note - Help needed in maintenance, Please raise PRs for new features and bug fixes, I will review and merge them*
-
 <img src="https://github.com/criminact/OTPView/blob/develop/github-assets/image.png"/> &nbsp;&nbsp;
 
 ## How to use the library in your project
-##### Step 1. Please paste this code in your ***settings.gradle*** file
+### Step 1. Please paste this code in your ***settings.gradle*** file
 ```java
 pluginManagement {
     repositories {
@@ -15,14 +13,14 @@ pluginManagement {
 }
 ```
 
-##### Step 2. Paste the below code in your ***build.gradle:app*** file
+### Step 2. Paste the below code in your ***build.gradle:app*** file
 ```java
 dependencies {
     implementation 'com.github.criminact:OTPView:Tag'
 }
 ```
 
-##### Step 3. Use the OTP text view in your xml file
+### Step 3. Use the OTP text view in your xml file
 ```java
 <com.noobcode.otpview.OTPView
         android:id="@+id/otpView"
@@ -38,7 +36,7 @@ dependencies {
     />
 ```
 
-##### Step 4. Use the OTP listener callback to get the OTP and a completion callback
+### Step 4. Use the OTP listener callback to get the OTP and a completion callback
 ```java
 var otpView = findViewById<OTPView>(R.id.otpView)
 
