@@ -41,6 +41,8 @@ class OTPView(context: Context, attrs: AttributeSet) : EditText(context, attrs) 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             if(p0?.length == otpLength){
                 OtpListener?.onOTPCompleted(p0.toString())
+            }else{
+                showNormalView()
             }
         }
 
@@ -159,6 +161,11 @@ class OTPView(context: Context, attrs: AttributeSet) : EditText(context, attrs) 
 
     fun showSuccess() {
         mPaint.color = otpSuccessColor
+        invalidate()
+    }
+
+    fun showNormalView() {
+        mPaint.color = otpLayoutColor
         invalidate()
     }
 
