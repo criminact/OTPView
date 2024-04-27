@@ -22,7 +22,6 @@ class OTPView(context: Context, attrs: AttributeSet) : EditText(context, attrs) 
     var otpLength: Int = 6
     var borderThickness: Int = 1
     var mPaint: Paint
-    var borderColor: Int = Color.BLACK
     var spaceBetween: Float = 24f
     var spaceBetweenWithDensity: Float = 24f
     var lineSpacing: Float = 8f
@@ -31,7 +30,8 @@ class OTPView(context: Context, attrs: AttributeSet) : EditText(context, attrs) 
     private var mClickListener: OnClickListener? = null
     private var otpLayoutColor: Int = this.currentTextColor
     private var otpLayoutType: Int = 1
-
+    private var otpSuccessColor: Int = Color.GREEN
+    private var otpFailureColor: Int = Color.RED
     //------------------------listeners------------------------
     private var mTextWatcher: TextWatcher? = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -61,11 +61,13 @@ class OTPView(context: Context, attrs: AttributeSet) : EditText(context, attrs) 
             spaceBetween = typedArray.getFloat(R.styleable.OTPView_spaceBetween, 24f)
             otpLayoutColor = typedArray.getInteger(R.styleable.OTPView_otpLayoutColor, this.currentTextColor)
             otpLayoutType = typedArray.getInteger(R.styleable.OTPView_otpLayoutType, 1)
+            otpSuccessColor = typedArray.getInteger(R.styleable.OTPView_successColor, Color.GREEN)
+            otpFailureColor = typedArray.getInteger(R.styleable.OTPView_failureColor, Color.RED)
 
             val multi = context.resources.displayMetrics.density
             mPaint = Paint(paint)
             mPaint.strokeWidth = multi * borderThickness
-            mPaint.color = borderColor
+            mPaint.color = otpLayoutColor
             setBackgroundResource(0)
             spaceBetweenWithDensity = multi * spaceBetween //convert to pixels for our density
 
@@ -105,7 +107,6 @@ class OTPView(context: Context, attrs: AttributeSet) : EditText(context, attrs) 
         val textLength = text!!.length
         val textWidths = FloatArray(textLength)
         paint.getTextWidths(getText(), 0, textLength, textWidths)
-        mPaint.color = otpLayoutColor
         if(otpLayoutType == 1){
             for (i in 0 until otpLength) {
                 canvas.drawLine(startX, bottom, startX + mCharSize, bottom, mPaint)
@@ -149,6 +150,16 @@ class OTPView(context: Context, attrs: AttributeSet) : EditText(context, attrs) 
     //------------------------setters------------------------
     fun setOTPListener(listener: OTPListener) {
         OtpListener = listener
+    }
+
+    fun showFailure() {
+        mPaint.color = otpFailureColor
+        invalidate()
+    }
+
+    fun showSuccess() {
+        mPaint.color = otpSuccessColor
+        invalidate()
     }
 
     override fun setOnClickListener(l: OnClickListener?) {

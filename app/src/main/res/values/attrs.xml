@@ -10,5 +10,7 @@
             <attr name="otpLength" format="integer"/>
             <attr name="backgroundColor" format="reference|color"/>
             <attr name="otpLayoutColor" format="reference|color"/>
+            <attr name="successColor" format="reference|color"/>
+            <attr name="failureColor" format="reference|color"/>
     </declare-styleable>
 </resources>
