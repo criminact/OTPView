@@ -6,8 +6,11 @@
 ## How to use the library in your project
 ### Step 1. Please paste this code in your ***settings.gradle*** file
 ```java
-pluginManagement {
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        google()
+        mavenCentral()
         maven { url 'https://jitpack.io' }
     }
 }
